@@ -1,0 +1,4 @@
+source ~/.gimme/envs/latest.env
+unset GOROOT
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
