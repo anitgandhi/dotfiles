@@ -1,22 +1,22 @@
 
 # Custom prompt
-LBLUE=$'\e[36;40m'
-PURPLE=$'\e[35;40m'
-GREEN=$'\e[32;40m'
-ORANGE=$'\e[33;40m'
-YELLOW=$'\e[37;40m'
-PINK=$'\e[31;40m'
+LBLUE=$'\e[36;49m'
+GREEN=$'\e[32;49m'
+ORANGE=$'\e[33;49m'
+YELLOW=$'\e[37;49m'
+PINK=$'\e[31;49m'
+DEFAULT=$'\e[39m'
  
 function _git_prompt() {
     local git_status="`git status -unormal 2>&1`"
     if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
         # Check if there are changes to repo
         if [[ "$git_status" =~ nothing\ to\ commit ]]; then
-            local gitcolour="| nothing to commit:$YELLOW"
+            local gitcolour="nothing to commit:$YELLOW"
         elif [[ "$git_status" =~ Untracked\ files ]]; then
-            local gitcolour="| untracked:$PINK"
+            local gitcolour="untracked:$PINK"
         else
-            local gitcolour="| branch:$LBLUE"
+            local gitcolour="branch:$LBLUE"
         fi
  
         # Print branch
@@ -33,8 +33,7 @@ function _git_prompt() {
 }
  
 function _prompt_command() {
-    PS1='\n\[$PINK\]\u \[$LBLUE\]| \[$ORANGE\]\D{%D} \[$LBLUE\]| \[$ORANGE\]\t \[$LBLUE\]| \[$GREEN\]\w \[$ORANGE\]`_git_prompt` \n\[$GREEN\][\!] → \[$YELLOW\]'
+    PS1='\n\[$PINK\]\u \[$LBLUE\]| \[$GREEN\]\w \[$LBLUE\]| \[$ORANGE\]`_git_prompt` \n\[$GREEN\]→ \[$DEFAULT \]'
 }
  
 export PROMPT_COMMAND=_prompt_command
-
